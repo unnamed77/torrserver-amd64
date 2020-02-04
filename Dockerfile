@@ -1,33 +1,27 @@
 FROM ubuntu
-LABEL maintainer="unnamed77"
+LABEL maintainer="https://github.com/unnamed77"
 
-# TorrServer version
-ENV TORRSERVER_VERSION="1.1.76_7"
+# Version
+ENV SERVER_VERSION="1.1.76_7"
 
-# TorrServer architecture
-ENV TORRSERVER_ARCH="linux-amd64"
-ENV TORRSERVER_FILE="TorrServer-${TORRSERVER_ARCH}"
+#File name
+ENV FILE_NAME="TorrServer-linux-amd64"
 
-# TorrServer release info
-ENV TORRSERVER_RELEASE="https://github.com/unnamed77/torrserver-amd64/raw/master/${TORRSERVER_FILE}"
+#  Path to File
+ENV URL="https://github.com/unnamed77/torrserver-amd64/raw/master/${FILE_NAME}"
 
-# TorrServer directory
-ENV TORRSERVER_DIR="/torrserver"
+# Work directory
+ENV WORK_DIR="/opt/torrserver"
 
 # Torrserver UI port
-ENV TORRSERVER_PORT="8090"
+ENV PORT="8090"
 
-# Download TorrServer binaries
-RUN apt-get update && apt-get install -y wget \
-	&& mkdir -p ${TORRSERVER_DIR} \
-	&& cd ${TORRSERVER_DIR} \
-	&& wget ${TORRSERVER_RELEASE} \
-	&& chmod +x ${TORRSERVER_FILE}
-
+#make dir and download binaries
+RUN apt-get update && apt-get install -y wget &&mkdir -p ${WORK_DIR} && cd ${WORK_DIR} && wget ${URL} && chmod +x ${FILE_NAME}
 # Expose port
-EXPOSE ${TORRSERVER_PORT}
+EXPOSE ${PORT}
 
 # Run TorrServer
-WORKDIR ${TORRSERVER_DIR}
-VOLUME ${TORRSERVER_DIR}
-ENTRYPOINT ./${TORRSERVER_FILE}
+WORKDIR ${WORK_DIR}
+VOLUME ${WORK_DIR}
+ENTRYPOINT ./${FILE_NAME}
