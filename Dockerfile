@@ -1,14 +1,12 @@
 FROM ubuntu
 LABEL maintainer="https://github.com/unnamed77"
 
-# Version
-ENV SERVER_VERSION="1.1.76_7"
 
 #File name
 ENV FILE_NAME="TorrServer-linux-amd64"
 
 #  Path to File
-ENV URL="https://github.com/unnamed77/torrserver-amd64/raw/master/${FILE_NAME}"
+ENV URL="https://github.com/YouROK/TorrServer/releases/download/1.1.77/TorrServer-linux-amd64"
 
 # Work directory
 ENV WORK_DIR="/opt/torrserver"
